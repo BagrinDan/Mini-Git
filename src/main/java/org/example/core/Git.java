@@ -3,9 +3,9 @@ package org.example.core;
 import org.example.commands.GitCommand;
 import org.example.core.storage.CommandsRepository;
 import org.example.core.storage.CommandsRepositoryImpl;
+import org.example.os.storage.FileSystemNode;
 
 import java.util.Scanner;
-
 
 
 
@@ -13,11 +13,13 @@ public class Git {
     private final Scanner sc;
     private final CommandsRepository repo;
     private final GitCommandValidator validator;
+    private final FileSystemNode node;
 
-    public Git(){
+    public Git(FileSystemNode node){
         this.sc = new Scanner(System.in);
         this.repo = new CommandsRepositoryImpl();
         this.validator = new GitCommandValidatorImpl(repo);
+        this.node = node;
     }
 
     public void exec(){
@@ -31,17 +33,7 @@ public class Git {
             switch (result){
                 case ValidationResult.Error e -> System.out.println(e.message());
                 case ValidationResult.Success s -> {
-
-                    String[] parts = userInput.trim().split("\\s+");
-                    if (parts.length == 0) continue;
-
-                    String commandName = parts[0];
-                    String[] args = java.util.Arrays.copyOfRange(parts, 1, parts.length);
-
-                    GitCommand command = repo.getCommands().get(commandName);
-                    if (command != null) {
-                        command.execute(args);
-                    }
+                    s.commandName().execute(node, s.args());
                 }
             }
         }

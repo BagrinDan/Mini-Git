@@ -1,4 +1,11 @@
 package org.example.commands;
 
-public class Add {
+import org.example.os.storage.FileSystemNode;
+
+public class Add implements GitCommand{
+
+    @Override
+    public void execute(FileSystemNode node, String[] args) {
+
+    }
 }

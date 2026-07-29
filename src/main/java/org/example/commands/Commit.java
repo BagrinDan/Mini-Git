@@ -1,8 +1,11 @@
 package org.example.commands;
 
+import org.example.os.storage.FileSystemNode;
+
 public class Commit implements GitCommand{
+
     @Override
-    public void execute(String[] args) {
-        System.out.println(args[0]);
+    public void execute(FileSystemNode node, String[] args) {
+
     }
 }

@@ -1,5 +1,7 @@
 package org.example.commands;
 
+import org.example.os.storage.FileSystemNode;
+
 public interface GitCommand { // Records
-    void execute(String[] args);
+    void execute(FileSystemNode node, String[] args);
 }

@@ -16,7 +16,6 @@ public class GitCommandValidatorImpl implements GitCommandValidator{
     public ValidationResult validateCommand(String userInput){
         String[] parts = userInput.split("\\s+");
 
-        // Checking 'git' integrity
         String gitCheck = parts[0];
         if(!gitCheck.equals("git")){
             return new ValidationResult.Error("error: not a git command");
